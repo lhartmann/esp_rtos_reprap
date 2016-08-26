@@ -1,0 +1,38 @@
+#! /bin/bash
+if [ -z "$ESPPORT" ]; then
+	ESPPORT=()
+
+	# Find out what port is the NodeMCU by looking for CH341.
+	for i in /sys/class/tty/ttyUSB*/device/driver; do
+		DRIVER="$(basename "$(readlink $i)")"
+		if [ "$DRIVER" == "ch341-uart" ]; then
+			ESPPORT[${#ESPPORT[@]}]=$(echo $i | grep -o ttyUSB.)
+		fi
+	done
+	
+	if [ "${#ESPPORT[@]}" -gt 1 ]; then
+		echo "Multiple CH341 ports detected, please choose one or set ESPPORT before running this script."
+		select i in "${ESPPORT[@]}"; do
+			ESPPORT="/$i"
+			break
+		done
+	fi
+	
+	ESPPORT="/dev/$ESPPORT"
+	
+	if [ -z "$ESPPORT" ]; then
+		echo "Failed to find any CH341 usb-serial ports."
+		echo "Please set ESPPORT to /dev/something."
+		exit 1
+	fi
+fi
+
+
+$SDK_PATH/../esptool/esptool.py \
+	--port $ESPPORT --baud 230400 \
+	write_flash \
+	--flash_freq 40m \
+	--flash_mode qio \
+	--flash_size 32m \
+	0x00000 $BIN_PATH/eagle.flash.bin \
+	0x20000 $BIN_PATH/eagle.irom0text.bin

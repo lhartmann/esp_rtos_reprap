@@ -1,0 +1,4 @@
+SDK_BASE ?= /opt/espressif/ESP8266_NONOS_SDK_V1.5.4
+SDK_PATH ?= /opt/espressif/ESP8266_RTOS_SDK
+FREERTOS ?= yes
+HTTPD_MAX_CONNECTIONS ?= 16

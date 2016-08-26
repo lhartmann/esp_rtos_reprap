@@ -1,0 +1,40 @@
+<html ng-app>
+	<head>
+		<title>Websocket Test</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<div ng-controller="BhaskaraController">
+			<h1>Remote Bhaskara Test</h1>
+			<form id="frmBhaskara">
+				<p>For a*x^2 + b*x + c = 0, enter:</p>
+				<p>a : <input type="text" ng-model="a"></p>
+				<p>b : <input type="text" ng-model="b"></p>
+				<p>c : <input type="text" ng-model="c"></p>
+				<p><input type=submit> <input type=button value=test id=btnTest></p>
+				<p>{{a}} x^2 + {{b}} x + {{c}} = 0</p>
+				<p>x1={{firstValidRoot}}, x2={{secondValidRoot}}</p>
+			</form>
+		</div>
+		<script src="bhaskara_controller.js"></script>
+	
+		<div ng-controller="EchoController">
+			<h1>Websocket Echo Test</h1>
+			
+			<form id="frmMessage">
+				<p>Enter message: <input type=text ng-model="message"></p>
+				<p>Total messages sent: {{messageCount}}</p>
+			</form>
+			
+			<table id="tblLog" border=1>
+				<tr ng-repeat="entry in log">
+					<td>{{entry.time}}</td>
+					<td>{{entry.text}}</td>
+				<tr>
+			</table>
+		</div>
+		<script src="echo_controller.js"></script>
+
+		<script src="angular_1.2.30.js"></script>
+	</body>
+</html>
