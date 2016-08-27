@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef CGIFLASH_H
 #define CGIFLASH_H
 
@@ -18,4 +21,8 @@ int cgiGetFirmwareNext(HttpdConnData *connData);
 int cgiUploadFirmware(HttpdConnData *connData);
 int cgiRebootFirmware(HttpdConnData *connData);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

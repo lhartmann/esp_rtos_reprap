@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 //Heatshrink config for the decompressor.
 #ifndef HEATSHRINK_CONFIG_H
 #define HEATSHRINK_CONFIG_H
@@ -22,4 +25,8 @@
 /* Use indexing for faster compression. (This requires additional space.) */
 #define HEATSHRINK_USE_INDEX 1
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

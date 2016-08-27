@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /*
  * Copyright (c) 2011 Scott Vokes <vokes.s@gmail.com>
  *
@@ -588,4 +591,8 @@ greatest_run_info greatest_info
 #define RUN_TESTp      GREATEST_RUN_TESTp
 #endif /* USE_ABBREVS */
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

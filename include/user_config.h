@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /*
  * ESPRSSIF MIT License
  *
@@ -27,3 +30,7 @@
 
 #endif
 
+
+#ifdef __cplusplus
+}
+#endif

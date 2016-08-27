@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* header */
 
 #ifndef __SHA1_H__
@@ -36,4 +39,8 @@ void sha1_initHmac(sha1nfo *s, const uint8_t* key, int keyLength);
  */
 uint8_t* sha1_resultHmac(sha1nfo *s);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

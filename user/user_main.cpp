@@ -126,8 +126,8 @@ void myBhaskaraSolver_onOpen(Websock *ws) {
 
 HttpdBuiltInUrl builtInUrls[]={
 	{"/cgiTestbed",             cgiTestbed,   NULL},
-	{"/websocket/echo.cgi",     cgiWebsocket, myEchoWebsocketConnect},
-	{"/websocket/bhaskara.cgi", cgiWebsocket, myBhaskaraSolver_onOpen},
+	{"/websocket/echo.cgi",     cgiWebsocket, (void*)myEchoWebsocketConnect},
+	{"/websocket/bhaskara.cgi", cgiWebsocket, (void*)myBhaskaraSolver_onOpen},
 	{"/",                       cgiRedirect,  "/index.html"},
 	{"*", cgiEspFsHook, NULL},
 	{NULL, NULL, NULL}
@@ -149,7 +149,7 @@ void myTask(void *pdParameters) {
  * Parameters   : none
  * Returns      : none
 *******************************************************************************/
-void user_init(void) {
+extern "C" void user_init(void) {
 	
 	UART_SetPrintPort(UART0);
 	UART_SetBaudrate(UART0, 115200);
@@ -164,7 +164,7 @@ void user_init(void) {
 	
 	if (pdPASS == xTaskCreate(
 		&myTask,
-		"myTask",
+		(signed char *)"myTask",
 		1024, // unsigned portSHORT usStackDepth,
 		0, // void *pvParameters,
 		6, // unsigned portBASE_TYPE uxPriority,

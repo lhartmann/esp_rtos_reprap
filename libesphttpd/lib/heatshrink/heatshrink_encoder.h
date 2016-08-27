@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef HEATSHRINK_ENCODER_H
 #define HEATSHRINK_ENCODER_H
 
@@ -106,4 +109,8 @@ HSE_poll_res heatshrink_encoder_poll(heatshrink_encoder *hse,
  * call heatshrink_encoder_poll and repeat. */
 HSE_finish_res heatshrink_encoder_finish(heatshrink_encoder *hse);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef CGIWEBSOCKET_H
 #define CGIWEBSOCKET_H
 
@@ -34,4 +37,7 @@ int ICACHE_FLASH_ATTR cgiWebSocketRecv(HttpdConnData *connData, char *data, int 
 int ICACHE_FLASH_ATTR cgiWebsockBroadcast(char *resource, char *data, int len, int flags);
 
 
+#endif
+#ifdef __cplusplus
+}
 #endif

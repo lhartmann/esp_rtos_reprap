@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef HEATSHRINK_H
 #define HEATSHRINK_H
 
@@ -17,4 +20,8 @@
 #define HEATSHRINK_LITERAL_MARKER 0x01
 #define HEATSHRINK_BACKREF_MARKER 0x00
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

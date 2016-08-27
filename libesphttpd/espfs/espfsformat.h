@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef ESPROFSFORMAT_H
 #define ESPROFSFORMAT_H
 
@@ -30,4 +33,7 @@ typedef struct {
 	int32_t fileLenDecomp;
 } __attribute__((packed)) EspFsHeader;
 
+#endif
+#ifdef __cplusplus
+}
 #endif

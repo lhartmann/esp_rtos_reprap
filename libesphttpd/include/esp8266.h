@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 // Combined include file for esp8266
 // Actually misnamed, as it also works for ESP32.
 // ToDo: Figure out better name
@@ -34,3 +37,7 @@
 #include "platform.h"
 #include "espmissingincludes.h"
 
+
+#ifdef __cplusplus
+}
+#endif

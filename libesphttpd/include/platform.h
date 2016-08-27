@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
@@ -35,4 +38,7 @@ typedef struct espconn* ConnTypePtr;
 
 
 
+#endif
+#ifdef __cplusplus
+}
 #endif

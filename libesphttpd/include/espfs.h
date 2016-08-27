@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef ESPFS_H
 #define ESPFS_H
 
@@ -20,4 +23,7 @@ int espFsRead(EspFsFile *fh, char *buff, int len);
 void espFsClose(EspFsFile *fh);
 
 
+#endif
+#ifdef __cplusplus
+}
 #endif

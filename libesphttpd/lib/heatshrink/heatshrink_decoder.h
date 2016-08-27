@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef HEATSHRINK_DECODER_H
 #define HEATSHRINK_DECODER_H
 
@@ -98,4 +101,8 @@ HSD_poll_res heatshrink_decoder_poll(heatshrink_decoder *hsd,
  * call heatshrink_decoder_poll and repeat. */
 HSD_finish_res heatshrink_decoder_finish(heatshrink_decoder *hsd);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

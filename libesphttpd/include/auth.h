@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef AUTH_H
 #define AUTH_H
 
@@ -19,4 +22,7 @@ typedef int (* AuthGetUserPw)(HttpdConnData *connData, int no, char *user, int u
 
 int ICACHE_FLASH_ATTR authBasic(HttpdConnData *connData);
 
+#endif
+#ifdef __cplusplus
+}
 #endif

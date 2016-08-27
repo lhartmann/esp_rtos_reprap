@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef CGIWIFI_H
 #define CGIWIFI_H
 
@@ -10,4 +13,7 @@ int cgiWiFiConnect(HttpdConnData *connData);
 int cgiWiFiSetMode(HttpdConnData *connData);
 int cgiWiFiConnStatus(HttpdConnData *connData);
 
+#endif
+#ifdef __cplusplus
+}
 #endif

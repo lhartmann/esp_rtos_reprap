@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef ESPMISSINGINCLUDES_H
 #define ESPMISSINGINCLUDES_H
 
@@ -74,4 +77,8 @@ void pvPortFree(void *ptr, const char *file, int line);
 
 #endif
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

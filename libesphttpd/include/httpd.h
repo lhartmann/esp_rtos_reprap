@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifndef HTTPD_H
 #define HTTPD_H
 
@@ -96,4 +99,7 @@ void httpdDisconCb(ConnTypePtr conn, char *remIp, int remPort);
 int httpdConnectCb(ConnTypePtr conn, char *remIp, int remPort);
 
 
+#endif
+#ifdef __cplusplus
+}
 #endif
