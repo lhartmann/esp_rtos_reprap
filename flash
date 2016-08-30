@@ -1,4 +1,6 @@
 #! /bin/bash
+[ -n "$1" ] && ESPPORT="$1"
+
 if [ -z "$ESPPORT" ]; then
 	ESPPORT=()
 
@@ -18,17 +20,17 @@ if [ -z "$ESPPORT" ]; then
 		done
 	fi
 	
-	ESPPORT="/dev/$ESPPORT"
-	
 	if [ -z "$ESPPORT" ]; then
 		echo "Failed to find any CH341 usb-serial ports."
-		echo "Please set ESPPORT to /dev/something."
+		echo "Please set ESPPORT to /dev/something or run:"
+		echo  "$0 <port>"
 		exit 1
 	fi
+	
+	ESPPORT="/dev/$ESPPORT"
 fi
 
-
-$SDK_PATH/../esptool/esptool.py \
+$ESPTOOL \
 	--port $ESPPORT --baud 230400 \
 	write_flash \
 	--flash_freq 40m \
