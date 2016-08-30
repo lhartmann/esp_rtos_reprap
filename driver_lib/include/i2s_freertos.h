@@ -12,6 +12,7 @@ extern "C" {
 void ICACHE_FLASH_ATTR i2sInit();
 void i2sSetRate(int rate, int lockBitcount);
 void i2sPushSample(unsigned int sample);
+uint32_t *i2sGetBuffer();
 long ICACHE_FLASH_ATTR i2sGetUnderrunCnt();
 
 

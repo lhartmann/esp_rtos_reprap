@@ -37,6 +37,7 @@
 #include "cgi-test.h"
 #include <math.h>
 #include <stdlib.h>
+#include "reprap_core.h"
 
 int __errno;
 
@@ -168,6 +169,19 @@ extern "C" void user_init(void) {
 		1024, // unsigned portSHORT usStackDepth,
 		0, // void *pvParameters,
 		6, // unsigned portBASE_TYPE uxPriority,
+		0 // xTaskHandle *pvCreatedTask
+	)) {
+		os_printf("Creating myTask succeeded.\n");
+	} else {
+		os_printf("Creating myTask failed.\n");
+	}
+	
+	if (pdPASS == xTaskCreate(
+		&reprap_core_task,
+		(signed char *)"reprap_core",
+		1024, // unsigned portSHORT usStackDepth,
+		0, // void *pvParameters,
+		10, // unsigned portBASE_TYPE uxPriority,
 		0 // xTaskHandle *pvCreatedTask
 	)) {
 		os_printf("Creating myTask succeeded.\n");

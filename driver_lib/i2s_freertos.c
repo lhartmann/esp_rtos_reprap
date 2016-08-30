@@ -294,6 +294,12 @@ void i2sPushSample(unsigned int sample) {
 	currDMABuff[currDMABuffPos++]=sample;
 }
 
+uint32_t *i2sGetBuffer() {
+	uint32_t *buff;
+	xQueueReceive(dmaQueue, &buff, portMAX_DELAY);
+	return buff;
+}
+
 
 long ICACHE_FLASH_ATTR i2sGetUnderrunCnt() {
 	return underrunCnt;
