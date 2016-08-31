@@ -23,6 +23,7 @@
  */
 
 #include "esp_common.h"
+#include "esp_system.h"
 #include <driver/uart.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
@@ -151,7 +152,8 @@ void myTask(void *pdParameters) {
  * Returns      : none
 *******************************************************************************/
 extern "C" void user_init(void) {
-	
+	system_update_cpu_freq(SYS_CPU_160MHZ);
+
 	UART_SetPrintPort(UART0);
 	UART_SetBaudrate(UART0, 115200);
 	os_printf("SDK version:%s\n", system_get_sdk_version());
