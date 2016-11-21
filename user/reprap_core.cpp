@@ -3,6 +3,8 @@
 #include "stepper.h"
 #include "throttle.h"
 #include "maskedtransportdelay.h"
+#include "buffered_sw_pwm.h"
+#include "sigmadelta.h"
 
 #include "c_types.h"
 #include "driver/i2s_freertos.h"
@@ -16,10 +18,18 @@
 #define DIR_MASK  0x00010000U
 #define NUM_STEPPERS 4
 
+#define PWM_MASK  0x00000010U
+#define PWM_COUNT 4
+#define SGD_MASK  0x00000100U
+#define SGD_COUNT 4
+
 static uint32_t forward = 0;
 static Throttle throttle;
 static Stepper  stepper[NUM_STEPPERS];
 static MaskedTransportDelay<uint32_t, 1, 0x7FFFFFFFU> td;
+
+static BufferedSoftwarePwm pwm[PWM_COUNT];
+static SigmaDeltaModulator sigmadelta[SGD_COUNT];
 
 static uint32_t step() {
 	uint32_t out = 0;
@@ -54,6 +64,20 @@ static uint32_t step() {
 		}
 	}
 	
+	// PWM modulators
+	for (int i=0; i<PWM_COUNT; ++i) {
+		if (pwm[i].step()) {
+			out |= PWM_MASK<<i;
+		}
+	}
+	
+	// Sigma-delta modulators
+	for (int i=0; i<SGD_COUNT; ++i) {
+		if (sigmadelta[i].step()) {
+			out |= SGD_MASK<<i;
+		}
+	}
+	
 	// Encode for I2S output:
 	//   Apply selective transport delay (31 LSBs delayed by 1 clock)
 	out = td(out);
@@ -67,6 +91,23 @@ static uint32_t step() {
 void reprap_core_task(void *arg) {
 	i2sInit();
 	i2sSetRate(RATE,1);
+	
+	// Start the PWM for servos, as a demonstration.
+	const uint32_t ms = 192; // Samples per milisecond
+	for (int i=0; i<PWM_COUNT; ++i) {
+		pwm[i].set(
+			1*ms + i*ms/(PWM_COUNT-1), // Duty
+			20*ms                      // Period
+		);
+	}
+	
+	// Start the Sigma Delta modulators.
+	for (int i=0; i<SGD_COUNT; ++i) {
+		sigmadelta[i].set(
+			100*ms * (i+1)/(SGD_COUNT+1), // Duty
+			100*ms                        // Period (Pretty meaningless, actually).
+		);
+	}
 	
 //	while (true) i2sPushSample(step());
 	
